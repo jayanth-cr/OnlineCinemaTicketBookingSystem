@@ -1,0 +1,35 @@
+.minmax {
+    min-width : 1150px; 
+    max-width : 1150px; 
+    min-height: 500px;
+}
+    .r {
+        display: flex;
+        font-size: x-small;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .c {
+        padding: 1px;
+        width: 18px;
+        height : 20px;
+        margin: 2px;
+        text-align: center;
+        border: rgb(53, 189, 53);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 5px;
+        
+    }
+
+    .c1 {
+        padding: 3px;
+        width: 20px;
+        margin: 3px;
+        text-align: center;
+
+
+    }
