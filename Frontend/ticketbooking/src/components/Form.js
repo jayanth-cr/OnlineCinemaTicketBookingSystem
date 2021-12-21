@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 
-function Form({ data, setData, sendGapToParent }) {
+function Form({ data, setData, sendGapToParent, check, setCheck }) {
 
     const [row, increRow] = useState(65)
+    const [g, setG] = useState(0)
 
     const removeRow = (e) => {
         const newData = []
@@ -23,16 +24,10 @@ function Form({ data, setData, sendGapToParent }) {
         }
         setData(newData);
     }
-
-    const updateSeatGap = (e) => {
-        sendGapToParent(e.target.gap.value)
-    }
-
     const updateData = (e) => {
-        setData([...data, { [String.fromCharCode(row)]: [Number(e.target.seats.value), {} ] }]);
+        setData([...data, { [String.fromCharCode(row)]: [Number(e.target.seats.value), {}] }]);
         increRow(row => row + 1)
     }
-
     return (
         <div className='col m-1 p-1 rounded-3 border border-2 border-primary justify-content-center'>
             <form onSubmit={(e) => { e.preventDefault(); updateData(e); }}>
@@ -42,22 +37,26 @@ function Form({ data, setData, sendGapToParent }) {
                 <button >Submit</button><br /><br />
             </form>
 
-            <form onSubmit={e => { e.preventDefault();  updateSeatGap(e); }}>
-                <label htmlFor='seat' >Remove Seats ?  &nbsp;&nbsp;&nbsp; </label><br /><br />
-                <label htmlFor='gap' >Fill No of gaps :&nbsp;&nbsp;&nbsp; </label>
-                <input required style={{ width: '50px' }} id='gap' name='gap'></input><br /><br />
-                <button>Done</button>
-            </form><br /><br /><br />
-            <button onClick={() => { console.log(data); }}>Final</button>
-            <br></br><br></br><br></br>
-
-
-            <form onSubmit={(e) => { e.preventDefault(); removeRow(e) }}>
+            <form onSubmit={e=>{ e.preventDefault() ; sendGapToParent(g) }}>
+                <h5>Remove seats ?  </h5><br></br>
+                <label className="switch">
+                    <input onChange={e => { setCheck(e.target.checked); check && setG(0);sendGapToParent(0) }} type="checkbox" />
+                    <span className="slider round"></span>
+                </label>&nbsp;&nbsp;&nbsp;
+                <label htmlFor='gap' style={{ visibility: !check ? 'hidden' : 'visible' }} >Fill No of gaps :&nbsp;&nbsp;&nbsp; </label>
+                <input required value={g} type='number' onChange={e => { setG(e.target.value) }} style={{ width: '50px', visibility: !check ? 'hidden' : 'visible' }} id='gap' name='gap'></input>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button style={{ visibility: !check ? 'hidden' : 'visible' }} >Done</button>
+            </form>
+            <br></br>
+            <form onSubmit={(e) => { e.preventDefault(); removeRow(e) ; increRow(row => row - 1) }}>
                 <h5>Remove a Row</h5>
                 <label htmlFor='remove'>Remove Row</label>
                 <input required style={{ width: '50px' }} id='remove' name='remove'></input><br /><br />
                 <button >Submit</button><br /><br />
             </form>
+            <br /><br /><br />
+            <button onClick={() => { console.log(data); }}>Final</button>
+
         </div>
     )
 }

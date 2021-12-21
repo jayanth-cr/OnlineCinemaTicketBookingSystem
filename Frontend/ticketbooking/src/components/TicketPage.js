@@ -6,17 +6,17 @@ import {GapProvider} from './gapContext'
 function TicketPage() {
     const [data, setData] = useState([])
     const [seatGap, setSeatGap] = useState(0)
+    const [check, setCheck] = useState(false)
     const sendGapToParent = (gap)=>{
         setSeatGap(gap);
     }   
-    console.log(data);
     return (
         <div className="App container-fluid ">
             <div className='row'>
                 <GapProvider value={seatGap}>
-                <Layout setData={setData} datas={data}  ></Layout>
+                <Layout setData={setData} datas={data}  check={check} setCheck={setCheck}  ></Layout>
                 </GapProvider>
-                <Form data={data} setData={setData} seatGap={seatGap} sendGapToParent={sendGapToParent} ></Form>
+                <Form data={data} setData={setData} seatGap={seatGap} sendGapToParent={sendGapToParent} check={check} setCheck={setCheck} ></Form>
             </div>
         </div>
     )

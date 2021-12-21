@@ -43,13 +43,11 @@ function Row({ data, datas, setData }) {
         let newObject
         let id = e.target.id.split('-')
         let i = id[0].charCodeAt(0) - 65;
-        console.log(id[1] in datas[id[0].charCodeAt(0) - 65][id[0]][1]);
         if (id[1] in datas[id[0].charCodeAt(0) - 65][id[0]][1]) {
             newObject = { [id[0]]: [datas[id[0].charCodeAt(0) - 65][id[0]][0], { ...datas[id[0].charCodeAt(0) - 65][id[0]][1], [id[1]]: (Number(datas[id[0].charCodeAt(0) - 65][id[0]][1][id[1]]) + Number(seatGap)) }] }
         }
         else {
             newObject = { [id[0]]: [datas[id[0].charCodeAt(0) - 65][id[0]][0], { ...datas[id[0].charCodeAt(0) - 65][id[0]][1], [id[1]]: Number(seatGap) }] }
-            console.log(newObject);
         }
         /*
         let gate = true
