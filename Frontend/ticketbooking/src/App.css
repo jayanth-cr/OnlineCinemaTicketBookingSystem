@@ -72,11 +72,11 @@
       }
       
       input:checked + .slider {
-        background-color: #2196F3;
+        background-color: black;
       }
       
       input:focus + .slider {
-        box-shadow: 0 0 1px #2196F3;
+        box-shadow: 0 0 1px black;
       }
       
       input:checked + .slider:before {
@@ -93,3 +93,14 @@
       .slider.round:before {
         border-radius: 50%;
       }
+      .c:hover {
+        cursor: pointer;
+    }
+    .mini{
+      width: auto;
+      max-height: 300px;
+      min-height: 200px;
+    }
+    .cardmini{
+      max-height: 500px;
+    }

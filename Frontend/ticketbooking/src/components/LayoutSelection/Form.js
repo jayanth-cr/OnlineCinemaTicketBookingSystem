@@ -23,18 +23,22 @@ function Form({ data, setData, sendGapToParent, check, setCheck }) {
 
         }
         setData(newData);
+        increRow(prev => prev > 65 ? prev - 1 : 65);
     }
+    console.log(row);
+    
     const updateData = (e) => {
         setData([...data, { [String.fromCharCode(row)]: [Number(e.target.seats.value), {}] }]);
         increRow(row => row + 1)
     }
     return (
-        <div className='col m-1 p-1 rounded-3 border border-2 border-primary justify-content-center'>
+        <div className='col m-1 p-1 3 border border-2 border-dark justify-content-center'>
+            
             <form onSubmit={(e) => { e.preventDefault(); updateData(e); }}>
                 <h5>Add New Row : </h5>
                 <label htmlFor='seats' >No of Seats : *&nbsp;&nbsp;&nbsp; </label><br /><br />
                 <input required style={{ width: '50px' }} id='seats' name='seats'></input><br /><br />
-                <button >Submit</button><br /><br />
+                <button className='btn btn-dark' >Submit</button><br /><br />
             </form>
 
             <form onSubmit={e=>{ e.preventDefault() ; sendGapToParent(g) }}>
@@ -45,17 +49,17 @@ function Form({ data, setData, sendGapToParent, check, setCheck }) {
                 </label>&nbsp;&nbsp;&nbsp;
                 <label htmlFor='gap' style={{ visibility: !check ? 'hidden' : 'visible' }} >Fill No of gaps :&nbsp;&nbsp;&nbsp; </label>
                 <input required value={g} type='number' onChange={e => { setG(e.target.value) }} style={{ width: '50px', visibility: !check ? 'hidden' : 'visible' }} id='gap' name='gap'></input>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button style={{ visibility: !check ? 'hidden' : 'visible' }} >Done</button>
+                <button className='btn btn-dark' style={{ visibility: !check ? 'hidden' : 'visible' }} >Done</button>
             </form>
             <br></br>
-            <form onSubmit={(e) => { e.preventDefault(); removeRow(e) ; increRow(row => row - 1) }}>
+            <form onSubmit={(e) => { e.preventDefault(); removeRow(e) ; }}>
                 <h5>Remove a Row</h5>
                 <label htmlFor='remove'>Remove Row</label>
                 <input required style={{ width: '50px' }} id='remove' name='remove'></input><br /><br />
-                <button >Submit</button><br /><br />
+                <button className='btn btn-dark' >Submit</button><br /><br />
             </form>
             <br /><br /><br />
-            <button onClick={() => { console.log(data); }}>Final</button>
+            <button className='btn btn-dark' onClick={() => { console.log(data); }}>Final</button>
 
         </div>
     )
