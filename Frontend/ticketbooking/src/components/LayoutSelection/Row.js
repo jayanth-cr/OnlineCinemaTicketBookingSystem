@@ -112,9 +112,7 @@ function Row({ data, datas, setData }) {
 
     return (
         <div className="r">
-
             {seat}
-
         </div>
     )
 }
